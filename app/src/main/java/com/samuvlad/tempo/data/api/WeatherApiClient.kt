@@ -1,6 +1,6 @@
 package com.samuvlad.tempo.data.api
 
-import com.samuvlad.tempo.data.api.model.WeatherApi
+import com.samuvlad.tempo.data.api.model.weather.WeatherApi
 import retrofit2.http.GET
 import retrofit2.http.Query
 

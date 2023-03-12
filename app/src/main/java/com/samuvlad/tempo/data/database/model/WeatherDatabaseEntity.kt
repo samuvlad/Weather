@@ -1,7 +1,12 @@
-package com.samuvlad.tempo.domain.model
+package com.samuvlad.tempo.data.database.model
 
-class Weather(
-    var id: Long,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class WeatherDatabaseEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long,
+    var idCity: Long,
     var name: String,
     var cod: Int,
     var timezone: Long,

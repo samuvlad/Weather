@@ -1,5 +1,6 @@
 package com.samuvlad.tempo.common.di
 
+import com.samuvlad.tempo.BuildConfig
 import com.samuvlad.tempo.data.api.WeatherApiClient
 import dagger.Module
 import dagger.Provides
@@ -30,7 +31,7 @@ object NetworkModule {
     fun provideWeatherRetrofit(httpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
             .client(httpClient)
-            .baseUrl("https://api.openweathermap.org/data/2.5/weather")
+            .baseUrl(BuildConfig.HOST)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
