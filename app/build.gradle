@@ -5,12 +5,16 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
-def Properties properties = new Properties()
-properties.load(project.rootProject.file("local.properties").newDataInputStream())
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace 'com.samuvlad.tempo'
     compileSdk 33
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.samuvlad.tempo"
@@ -21,8 +25,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'HOST', '"https://api.openweathermap.org/data/2.5/weather"'
-        buildConfigField 'String', 'WeatherAPIKeyProp', properties.getProperty('"WeatherAPIKeyProp"', '""')
+        buildConfigField 'String', 'HOST', '"https://api.openweathermap.org/data/2.5/"'
+        buildConfigField 'String', 'WeatherAPIKeyProp',  "\"" + localProperties['WeatherAPIKeyProp'] + "\""
     }
 
     buildTypes {
@@ -77,6 +81,10 @@ dependencies {
 
     kapt("androidx.room:room-compiler:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0")
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 
 
 }

@@ -1,5 +1,7 @@
 package com.samuvlad.tempo.data.api.mapper
 
+import android.util.Log
+import com.samuvlad.tempo.common.constants.Constants
 import com.samuvlad.tempo.data.api.model.weather.WeatherApi
 import com.samuvlad.tempo.data.base.Mapper
 import com.samuvlad.tempo.domain.model.Weather
@@ -27,10 +29,11 @@ class WeatherApiMapper : Mapper<WeatherApi, Weather> {
             seaLeve = mode.main.sea_leve,
             grndLevel = mode.main.grnd_level,
             base = mode.base,
-            main = mode.weather.main,
-            description = mode.weather.description,
+            main = mode.weather[0].main,
+            description = mode.weather[0].description,
             lat = mode.coord.lat,
-            lon = mode.coord.lon
+            lon = mode.coord.lon,
+            icon = Constants.ICON_URL+mode.weather[0].icon+"@2x.png"
         )
     }
 }

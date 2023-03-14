@@ -6,10 +6,10 @@ import retrofit2.http.Query
 
 interface WeatherApiClient {
 
-    @GET("")
+    @GET("weather")
     suspend fun getCurrentWeather(@Query("appid") token: String,
-                                  @Query("lat") lat: String,
-                                  @Query("lon") lon: String,
+                                  @Query("lat") lat: Double,
+                                  @Query("lon") lon: Double,
                                   @Query("mode") mode: String,
                                   @Query("units") units: String,
                                   @Query("lang") lang: String): WeatherApi

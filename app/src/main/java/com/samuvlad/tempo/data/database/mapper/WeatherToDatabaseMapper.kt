@@ -31,7 +31,8 @@ class WeatherToDatabaseMapper: Mapper<Weather, WeatherDatabaseEntity> {
             feelsLike = mode.feelsLike,
             description = mode.description,
             lat = mode.lat,
-            lon = mode.lon
+            lon = mode.lon,
+            icon = mode.icon
         )
     }
 }

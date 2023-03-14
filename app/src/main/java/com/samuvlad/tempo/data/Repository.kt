@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val weatherApiClient: WeatherApiClient): BaseApiClient() {
 
-    suspend fun getCurrentWeather(lat: String, lon: String, mode: String, units: String, lang: String): Resource<Weather> = safeApiCall(
+    suspend fun getCurrentWeather(lat: Double, lon: Double, mode: String, units: String, lang: String): Resource<Weather> = safeApiCall(
         WeatherApiMapper()
     ) {
         weatherApiClient.getCurrentWeather(BuildConfig.WeatherAPIKeyProp, lat, lon, mode, units, lang)

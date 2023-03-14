@@ -19,11 +19,11 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun providerHttpClientBuilder(): OkHttpClient.Builder {
+    fun providerHttpClientBuilder(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
         return OkHttpClient.Builder().addInterceptor(loggingInterceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS).build()
     }
 
     @Singleton
@@ -36,6 +36,7 @@ object NetworkModule {
             .build()
     }
 
+    @Provides
     fun provideWeatherApiClient(retrofit: Retrofit): WeatherApiClient {
         return retrofit.create(WeatherApiClient::class.java)
     }

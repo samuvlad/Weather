@@ -1,5 +1,6 @@
 package com.samuvlad.tempo.data.base
 
+import android.util.Log
 import com.samuvlad.tempo.domain.base.FailureError
 import com.samuvlad.tempo.domain.base.Resource
 import kotlinx.coroutines.Dispatchers
@@ -12,9 +13,11 @@ interface SafeApiCall {
         return  withContext(Dispatchers.IO){
             try {
                 val result = apiCall.invoke()
+                Log.d("DOG",result.toString())
                 val model = mapper.map(result)
                 Resource.Success(model)
             }catch (throwable: Throwable){
+                Log.d("DOG", throwable.message.toString())
                 Resource.Failure(FailureError.Network)
             }
         }

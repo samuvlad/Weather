@@ -23,6 +23,7 @@ class Weather(
     var base: String,
     var main: String,
     var description: String,
-    var lat: Long,
-    var lon: Long
+    var lat: Double,
+    var lon: Double,
+    var icon: String
 )
