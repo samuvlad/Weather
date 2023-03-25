@@ -1,4 +1,4 @@
-package com.samuvlad.tempo.data.api
+package com.samuvlad.tempo.data.api.interfaces
 
 import com.samuvlad.tempo.data.api.model.weather.WeatherApi
 import retrofit2.http.GET

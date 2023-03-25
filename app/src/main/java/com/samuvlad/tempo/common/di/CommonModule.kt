@@ -1,10 +1,9 @@
 package com.samuvlad.tempo.common.di
 
 import android.content.Context
-import androidx.room.Room
 import com.samuvlad.tempo.data.Repository
-import com.samuvlad.tempo.data.database.AppDatabase
-import com.samuvlad.tempo.data.database.dao.WeatherDao
+import com.samuvlad.tempo.data.api.interfaces.WeatherApiClient
+import com.samuvlad.tempo.data.service.LocationService
 import com.samuvlad.tempo.domain.interfaces.IRepository
 import dagger.Module
 import dagger.Provides
@@ -13,24 +12,23 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+object CommonModule {
 
     @Singleton
     @Provides
-    fun providerDatabase(@ApplicationContext appContext: Context): AppDatabase{
-        return Room.databaseBuilder(
-                appContext,
-        AppDatabase::class.java, "database"
-        ).build()
+    fun providerContext(@ApplicationContext appContext: Context): Context {
+        return appContext
     }
 
     @Singleton
     @Provides
-    fun providerWeatherDao(appDatabase: AppDatabase): WeatherDao{
-        return appDatabase.weatherDao()
+    fun providerLocation(appContext: Context): LocationService {
+        return LocationService(appContext)
     }
+
 
 
 }

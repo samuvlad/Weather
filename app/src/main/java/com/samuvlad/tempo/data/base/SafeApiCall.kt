@@ -13,12 +13,11 @@ interface SafeApiCall {
         return  withContext(Dispatchers.IO){
             try {
                 val result = apiCall.invoke()
-                Log.d("DOG",result.toString())
                 val model = mapper.map(result)
                 Resource.Success(model)
             }catch (throwable: Throwable){
-                Log.d("DOG", throwable.message.toString())
-                Resource.Failure(FailureError.Network)
+                Log.e("Error REST Service", throwable.message.toString())
+                handle(throwable)
             }
         }
 
@@ -27,10 +26,16 @@ interface SafeApiCall {
     private fun handle(throwable: Throwable): Resource.Failure {
         return when (throwable) {
             is HttpException -> {
-                Resource.Failure(FailureError.Network)
+                Resource.Failure(codeError(throwable.code()))
             }
-
             else -> Resource.Failure(FailureError.Network)
+        }
+    }
+
+    private fun codeError(codeError: Int): FailureError{
+        return when(codeError){
+            400 -> FailureError.BadRequest
+            else -> FailureError.Unknown
         }
     }
 
